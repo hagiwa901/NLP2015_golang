@@ -1,5 +1,5 @@
 # NLP2015_golang
-[100本ノック（Golang）](http://www.cl.ecei.tohoku.ac.jp/nlp100/)
+[100本ノック](http://www.cl.ecei.tohoku.ac.jp/nlp100/)
 
 # 動かし方
 ```
