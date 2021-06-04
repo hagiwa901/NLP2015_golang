@@ -12,6 +12,7 @@ func main() {
 	str = strings.Replace(str, ",", "", -1)
 	// .の削除
 	str = strings.Replace(str, ".", "", -1)
+	// 空白で区切る
 	slice := strings.Split(str, " ")
 	for _, s := range slice {
 		s1 += s[0:1]
