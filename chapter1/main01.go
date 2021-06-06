@@ -4,20 +4,15 @@ import (
 	"fmt"
 )
 
-/*
-https://stackoverflow.com/questions/1752414/how-to-reverse-a-string-in-go
-How to reverse a string in Go?
-*/
-// string型を逆順にする
-func Reverse(s string) string {
-	runes := []rune(s)
-	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-		runes[i], runes[j] = runes[j], runes[i]
-	}
-	return string(runes)
-}
-
 func main() {
-	str := "stressed"
-	fmt.Println(Reverse(str))
+	/*
+	https://itsakura.com/golang-slice
+	*/
+	str := "パタトクカシーー"
+	const char_num = 3
+	// UTF8で書かれているため、1文字3バイトずつ動かす
+	for i := 0; i < len(str); i += char_num * 2{
+		fmt.Print(str[i:i+char_num])
+	}
+	fmt.Println()
 }

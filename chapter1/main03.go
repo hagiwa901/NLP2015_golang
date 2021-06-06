@@ -1,20 +1,21 @@
 package main
 
 import (
+	"strings"
 	"fmt"
 )
 
 func main() {
-	/*
-	https://itsakura.com/golang-slice
-	*/
-	str1 := "パトカー"
-	str2 := "タクシー"
-	var str string
-	const char_num = 3
-	// UTF8で書かれているため、1文字3バイトずつ動かす
-	for i := 0; i < len(str1); i += char_num{
-		str += str1[i:i+char_num] + str2[i:i+char_num]
+	str := "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+	var s1 string
+	// ,の削除
+	str = strings.Replace(str, ",", "", -1)
+	// .の削除
+	str = strings.Replace(str, ".", "", -1)
+	// 空白で区切る
+	slice := strings.Split(str, " ")
+	for _, s := range slice {
+		s1 += s[0:1]
 	}
-	fmt.Println(str)
+	fmt.Println(s1)
 }
