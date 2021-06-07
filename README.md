@@ -5,3 +5,8 @@
 ```
 go run ファイル名.go
 ```
+
+# 
+```
+go get github.com/deckarep/golang-set
+```
