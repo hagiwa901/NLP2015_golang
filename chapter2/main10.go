@@ -1,3 +1,9 @@
+/*
+行数をカウントせよ．確認にはwcコマンドを用いよ．
+
+% wc chapter2/hightemp.txt
+      24      98     813 chapter2/hightemp.txt
+*/
 package main
 
 import(
