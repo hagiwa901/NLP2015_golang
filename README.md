@@ -6,7 +6,7 @@
 go run ファイル名.go
 ```
 
-# 
+# パッケージのダウンロード
 ```
 go get github.com/deckarep/golang-set
 ```
