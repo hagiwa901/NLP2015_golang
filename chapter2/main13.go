@@ -1,6 +1,6 @@
 /*
-自然数Nをコマンドライン引数などの手段で受け取り，入力のうち先頭のN行だけを表示せよ．
-確認にはheadコマンドを用いよ
+12で作ったcol1.txtとcol2.txtを結合し，元のファイルの1列目と2列目をタブ区切りで並べたテキストファイルを作成せよ．
+確認にはpasteコマンドを用いよ．
 */
 
 package main
@@ -10,29 +10,38 @@ import(
     "os"
     "io/ioutil"
 	"strings"
-	"flag"
 )
 
 func main() {
-	// コマンドライン引数
-    args := flag.Int("n", 24, "help message for n option")
-	flag.Parse()
-
 	// ファイルをOpenする
-    f, err := os.Open("chapter2/hightemp.txt")
+    f1, err := os.Open("chapter2/col1.txt")
     if err != nil{
         fmt.Println("error")
     }
-    defer f.Close()
+    defer f1.Close()
 
     // 一気に全部読み取り
-    b, err := ioutil.ReadAll(f)
+    b1, err := ioutil.ReadAll(f1)
 
-	str := string(b)
-	slice := strings.Split(str, "\n")
+	str1 := string(b1)
+	slice1 := strings.Split(str1, "\n")
 
-    // 出力
-	for i := 0; i < *args; i++ {
-		fmt.Println(slice[i])
+	// ファイルをOpenする
+    f2, err := os.Open("chapter2/col2.txt")
+    if err != nil{
+        fmt.Println("error")
+    }
+    defer f2.Close()
+
+    // 一気に全部読み取り
+    b2, err := ioutil.ReadAll(f2)
+
+	str2 := string(b2)
+	slice2 := strings.Split(str2, "\n")
+
+    var col string
+	for i := 0; i < len(slice1); i++ {
+		col += slice1[i] + "\t" + slice2[i] + "\n"
 	}
+	fmt.Println(col)
 }
