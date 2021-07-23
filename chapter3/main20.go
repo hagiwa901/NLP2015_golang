@@ -3,18 +3,21 @@ Wikipedia記事のJSONファイルを読み込み，「イギリス」に関す�
 問題21-29では，ここで抽出した記事本文に対して実行せよ．
 */
 
+// https://cipepser.hatenablog.com/entry/2017/03/17/231556
+
 package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"bufio"
 	"fmt"
-	"os"
+ 	"os"
+	"io"
 )
 
 type jawikiStruct struct {
 	Text	string	`json: "text"`
-    Title	string	`json: "title"`
+	Title	string	`json: "title"`
 }
 
 func main() {
@@ -23,31 +26,33 @@ func main() {
 	*/
 
 	// JSONファイル読み込み
+
 	f, err := os.Open("chapter3/jawiki-country.json")
 	if err != nil {
 		fmt.Println("error")
 	}
-	defer f.Close()
-	
-	b, err := ioutil.ReadFile("chapter3/jawiki-country.json")
 
-	if err != nil {
-		fmt.Println("json input error")
-	}
+	r := bufio.NewReader(f)
 
 	// JSONデコード
-    var jawiki []jawikiStruct
-    if err := json.Unmarshal(b, &jawiki); err != nil {
-		if err, ok := err.(*json.SyntaxError); ok {
-			fmt.Println(string(b[err.Offset-15:err.Offset+15]))
+	var jawikis []jawikiStruct
+	
+	for {
+		// fmt.Println(scanner)
+		b, err := r.ReadBytes('\n')
+		if err == io.EOF {
+			break
 		}
-        fmt.Println(err)
-    }
+		var jawiki jawikiStruct
+		json.Unmarshal([]byte(b), &jawiki)
+		jawikis = append(jawikis, jawiki)
+	}
 
-	// デコードしたデータを表示
-    for _, j := range jawiki {
-		if(j.Title == "イギリス"){
-			fmt.Printf("%s", j.Title)
+	for _, jawiki := range jawikis {
+		if(jawiki.Title == "イギリス") {
+			fmt.Println(jawiki.Text)
 		}
-    }
+	}
+	
+	f.Close()
 }
